@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cts_disc_compare</title>
+  <meta name="keywords" content="cts_disc_compare">
+  <meta name="description" content="Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html src --><!-- menu.html post_process -->
+<h1>cts_disc_compare
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;
+ Author: Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</span>
+0002 <span class="comment">% Author: Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</span>
+0003 
+0004 clear;clc; format short g; format compact; close all;
+0005 addpath(<span class="string">'../spm_results'</span>);
+0006 load(<span class="string">'cts_sim_Northrop_cnst_dischg_initial_soc_100pct_May_26_2018_13_39_12'</span>);
+0007 
+0008 run(<span class="string">'plots_spm.m'</span>);
+0009 clear;
+0010 
+0011 load(<span class="string">'disc_sim_Northrop_cnst_dischg_initial_soc_100pct_May_26_2018_13_39_24'</span>);
+0012 figure(1); subplot(211); hold on; subplot(212); hold on;
+0013 figure(2); subplot(211); hold on; subplot(212); hold on;
+0014 
+0015 run(<span class="string">'plots_spm.m'</span>);
+0016 
+0017 figure(1);
+0018 shg;</pre></div>
+<hr><address>Generated on Sat 26-May-2018 17:01:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

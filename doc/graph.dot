@@ -1,0 +1,27 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  cts_time_spm_simulation -> check_termination;
+  cts_time_spm_simulation -> spm_cts_stateEqn_three_states;
+  cts_time_spm_simulation -> parameters_spm_basic;
+  cts_time_spm_simulation -> spm_three_states_battery_voltage;
+  disc_time_spm_simulation -> AB_matrices_spm_three_states;
+  disc_time_spm_simulation -> check_termination;
+  disc_time_spm_simulation -> parameters_spm_basic;
+  disc_time_spm_simulation -> spm_three_states_battery_voltage;
+  cell_params_Northrop -> compute_Uocp_neg_Northrop;
+  cell_params_Northrop -> compute_Uocp_pos_Northrop;
+
+  cts_time_spm_simulation [URL="src/cts_time_spm_simulation.html"];
+  disc_time_spm_simulation [URL="src/disc_time_spm_simulation.html"];
+  cts_disc_compare [URL="src/post_process/cts_disc_compare.html"];
+  plots_spm [URL="src/post_process/plots_spm.html"];
+  AB_matrices_spm_three_states [URL="src/sim_modular_fcns/AB_matrices_spm_three_states.html"];
+  cell_params_Northrop [URL="src/sim_modular_fcns/cell_params/Northrop_cell/cell_params_Northrop.html"];
+  compute_Uocp_neg_Northrop [URL="src/sim_modular_fcns/cell_params/Northrop_cell/compute_Uocp_neg_Northrop.html"];
+  compute_Uocp_pos_Northrop [URL="src/sim_modular_fcns/cell_params/Northrop_cell/compute_Uocp_pos_Northrop.html"];
+  check_termination [URL="src/sim_modular_fcns/check_termination.html"];
+  compute_soc [URL="src/sim_modular_fcns/compute_soc.html"];
+  spm_cts_stateEqn_three_states [URL="src/sim_modular_fcns/cts_time_specific_supporting_fcns/spm_cts_stateEqn_three_states.html"];
+  parameters_spm_basic [URL="src/sim_modular_fcns/parameters_spm_basic.html"];
+  spm_three_states_battery_voltage [URL="src/sim_modular_fcns/spm_three_states_battery_voltage.html"];
+}

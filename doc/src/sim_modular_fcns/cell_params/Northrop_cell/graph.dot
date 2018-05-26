@@ -1,0 +1,9 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+  cell_params_Northrop -> compute_Uocp_neg_Northrop;
+  cell_params_Northrop -> compute_Uocp_pos_Northrop;
+
+  cell_params_Northrop [URL="cell_params_Northrop.html"];
+  compute_Uocp_neg_Northrop [URL="compute_Uocp_neg_Northrop.html"];
+  compute_Uocp_pos_Northrop [URL="compute_Uocp_pos_Northrop.html"];
+}

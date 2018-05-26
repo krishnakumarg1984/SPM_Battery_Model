@@ -1,0 +1,6 @@
+/* Created by mdot for Matlab */
+digraph m2html {
+
+  cts_time_spm_simulation [URL="cts_time_spm_simulation.html"];
+  disc_time_spm_simulation [URL="disc_time_spm_simulation.html"];
+}

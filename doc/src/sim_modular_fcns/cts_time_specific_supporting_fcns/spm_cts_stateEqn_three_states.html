@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of spm_cts_stateEqn_three_states</title>
+  <meta name="keywords" content="spm_cts_stateEqn_three_states">
+  <meta name="description" content="returns dx_dt given the vector x and input u at any given time-step">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../../menu.html src --><!-- ../menu.html sim_modular_fcns --><!-- menu.html cts_time_specific_supporting_fcns -->
+<h1>spm_cts_stateEqn_three_states
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>returns dx_dt given the vector x and input u at any given time-step</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="box"><strong>function dx_dt = spm_cts_stateEqn_three_states(x,u,param) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> returns dx_dt given the vector x and input u at any given time-step
+ x(1) = q_pos, x(2) = q_neg, x(3) = cs_avg_neg
+ u = load current (A). Positive implies discharge.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../../matlabicon.gif)">
+<li><a href="../../../src/cts_time_spm_simulation.html" class="code" title="">cts_time_spm_simulation</a>	Copyright (c) 2018 Gopalakrishnan, Krishnakumar <krishnak@vt.edu></li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function dx_dt = spm_cts_stateEqn_three_states(x,u,param)</a>
+0002 <span class="comment">% returns dx_dt given the vector x and input u at any given time-step</span>
+0003 <span class="comment">% x(1) = q_pos, x(2) = q_neg, x(3) = cs_avg_neg</span>
+0004 <span class="comment">% u = load current (A). Positive implies discharge.</span>
+0005 
+0006 <span class="comment">% Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</span>
+0007 <span class="comment">% Author: Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</span>
+0008 
+0009 F = param.F;
+0010 A = param.A;
+0011 
+0012 R_pos  = param.R_p;
+0013 R_neg  = param.R_n;
+0014 
+0015 Ds_pos = param.D_p;
+0016 Ds_neg = param.D_n;
+0017 
+0018 a_pos  = param.a_p;
+0019 a_neg  = param.a_n;
+0020 
+0021 L_pos  = param.len_p;
+0022 L_neg  = param.len_n;
+0023 
+0024 a_x1_cts = -30*Ds_pos/(R_pos^2);
+0025 b_x1_cts = (45/2)/(R_pos^2*a_pos*L_pos*F*A);
+0026 
+0027 a_x2_cts = -30*Ds_neg/(R_neg^2);
+0028 b_x2_cts = (-45/2)/(R_neg^2*a_neg*L_neg*F*A);
+0029 
+0030 dx1_dt = a_x1_cts*x(1) + b_x1_cts*u;
+0031 dx2_dt = a_x2_cts*x(2) + b_x2_cts*u;
+0032 dx3_dt = (-3/(R_neg*a_neg*L_neg*F*A))*u;
+0033 
+0034 dx_dt  = [dx1_dt; dx2_dt ; dx3_dt];
+0035 
+0036 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sat 26-May-2018 17:01:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

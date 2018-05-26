@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of cell_params_Northrop</title>
+  <meta name="keywords" content="cell_params_Northrop">
+  <meta name="description" content="The struct 'param' is appended with a list of cell-specific parameters">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../../../menu.html src --><!-- ../../menu.html sim_modular_fcns --><!-- # cell_params --><!-- menu.html Northrop_cell -->
+<h1>cell_params_Northrop
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../../../up.png"></a></h2>
+<div class="box"><strong>The struct 'param' is appended with a list of cell-specific parameters</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../../../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> The struct 'param' is appended with a list of cell-specific parameters</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../../../matlabicon.gif)">
+<li><a href="compute_Uocp_neg_Northrop.html" class="code" title="function U_n = compute_Uocp_neg_Northrop(theta_n)">compute_Uocp_neg_Northrop</a>	</li><li><a href="compute_Uocp_pos_Northrop.html" class="code" title="function U_p = compute_Uocp_pos_Northrop(theta_p)">compute_Uocp_pos_Northrop</a>	</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../../../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% The struct 'param' is appended with a list of cell-specific parameters</span>
+0002 
+0003 param.I_1C = 60;   <span class="comment">% amps (1C-rate current corresponding to cell capacity)</span>
+0004 
+0005 <span class="comment">%% Electrode Surface Area in the planar direction</span>
+0006 param.A = 2.05268559698939; <span class="comment">% m^2; overall active surface area</span>
+0007 
+0008 <span class="comment">%% Solid particle radius [m]</span>
+0009 param.R_n = 2e-6;
+0010 param.R_p = 2e-6;
+0011 
+0012 <span class="comment">%% Electrode thicknesses [m]</span>
+0013 param.len_n = 50e-6;
+0014 param.len_p = 40.98e-6;
+0015 
+0016 <span class="comment">%% Max concentrations of Li in the solid phase [mol/m^3]</span>
+0017 param.cs_max_n = 30555;
+0018 param.cs_max_p = 51554;
+0019 
+0020 <span class="comment">%% Solid diffusion coefficients [m^2 / s]</span>
+0021 param.D_n = 3.9e-14;
+0022 param.D_p = 1.0e-14;
+0023 
+0024 <span class="comment">%% Reaction rate coefficients [m^2.5/(mol^0.5 s)]</span>
+0025 param.k_n = 5.031e-11;
+0026 param.k_p = 2.334e-11;
+0027 
+0028 <span class="comment">%% Electrolyte Conductivity Function</span>
+0029 param.ce_init = 1000;   <span class="comment">% Electrolyte Li-ions initial concentration [mol/m^3]</span>
+0030 
+0031 <span class="comment">%% Stoichiometry Limits</span>
+0032 param.theta_max_pos = 0.49550;  <span class="comment">% at 100% cell SOC</span>
+0033 param.theta_max_neg = 0.85510;  <span class="comment">% at 100% cell SOC</span>
+0034 param.theta_min_pos = 0.99174;  <span class="comment">% at 0% cell SOC</span>
+0035 param.theta_min_neg = 0.01429;  <span class="comment">% at 0% cell SOC</span>
+0036 
+0037 <span class="comment">%% Solid phase volume fraction</span>
+0038 param.vol_fraction_neg = 0.4824;
+0039 param.vol_fraction_pos = 0.5900;
+0040 
+0041 <span class="comment">%% Interfacial surface area Calculations [m^2 / m^3]</span>
+0042 param.a_n = 3*param.vol_fraction_neg/param.R_n; <span class="comment">% Negative electrode</span>
+0043 param.a_p = 3*param.vol_fraction_pos/param.R_p; <span class="comment">% Positive electrode</span>
+0044 
+0045 <span class="comment">%% OCP function handles</span>
+0046 param.compute_Uocp_pos = @<a href="compute_Uocp_pos_Northrop.html" class="code" title="function U_p = compute_Uocp_pos_Northrop(theta_p)">compute_Uocp_pos_Northrop</a>;
+0047 param.compute_Uocp_neg = @<a href="compute_Uocp_neg_Northrop.html" class="code" title="function U_n = compute_Uocp_neg_Northrop(theta_n)">compute_Uocp_neg_Northrop</a>;</pre></div>
+<hr><address>Generated on Sat 26-May-2018 17:01:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

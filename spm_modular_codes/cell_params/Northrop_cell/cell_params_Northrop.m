@@ -10,8 +10,8 @@ param.R_n = 2e-6;
 param.R_p = 2e-6;
 
 %% Electrode thicknesses [m]
-param.len_n = 50e-6;
-param.len_p = 40.98e-6;
+param.len_n = 88e-6;
+param.len_p = 72e-6;
 
 %% Max concentrations of Li in the solid phase [mol/m^3]
 param.cs_max_n = 30555;

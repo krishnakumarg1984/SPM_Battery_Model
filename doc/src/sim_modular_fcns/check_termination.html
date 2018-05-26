@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of check_termination</title>
+  <meta name="keywords" content="check_termination">
+  <meta name="description" content="Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html src --><!-- menu.html sim_modular_fcns -->
+<h1>check_termination
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function overall_exit_status = check_termination(soc_pct,v_cell,params) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;
+ Author: Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+<li><a href="../../src/cts_time_spm_simulation.html" class="code" title="">cts_time_spm_simulation</a>	Copyright (c) 2018 Gopalakrishnan, Krishnakumar <krishnak@vt.edu></li><li><a href="../../src/disc_time_spm_simulation.html" class="code" title="">disc_time_spm_simulation</a>	Copyright (c) 2018 Gopalakrishnan, Krishnakumar <krishnak@vt.edu></li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function overall_exit_status = check_termination(soc_pct,v_cell,params)</a>
+0002 
+0003 <span class="comment">% Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</span>
+0004 <span class="comment">% Author: Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</span>
+0005 
+0006 exit_status = 0; <span class="comment">% No abnormal condition has been reached. Simulation valid.</span>
+0007 
+0008 <span class="keyword">if</span> soc_pct &lt; params.CutoffSOC
+0009     fprintf(<span class="string">'Cell SOC is below lower cutoff\n'</span>);
+0010     exit_status = [exit_status;1];
+0011 <span class="keyword">elseif</span> soc_pct &gt; params.CutoverSOC
+0012     fprintf(<span class="string">'Cell SOC is above upper cutoff\n'</span>);
+0013     exit_status = [exit_status;2];
+0014 <span class="keyword">end</span>
+0015 
+0016 <span class="keyword">if</span> v_cell &lt; params.CutoffVoltage
+0017     fprintf(<span class="string">'Cell Voltage is below lower cutoff\n'</span>);
+0018     exit_status = [exit_status;3];
+0019 <span class="keyword">elseif</span> v_cell &gt; params.CutoverVoltage
+0020     fprintf(<span class="string">'Cell Voltage is above upper cutoff\n'</span>);
+0021     exit_status = [exit_status;4];
+0022 <span class="keyword">end</span>
+0023 
+0024 overall_exit_status = sum(exit_status); <span class="comment">% is 0 if no cutoffs were hit</span>
+0025 
+0026 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sat 26-May-2018 17:01:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of compute_soc</title>
+  <meta name="keywords" content="compute_soc">
+  <meta name="description" content="Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html &copy; 2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../../m2html.css">
+  <script type="text/javascript">
+    if (top.frames.length == 0) { top.location = "../../index.html"; };
+  </script>
+</head>
+<body>
+<a name="_top"></a>
+<!-- ../menu.html src --><!-- menu.html sim_modular_fcns -->
+<h1>compute_soc
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="box"><strong>function soc_pct = compute_soc(cs_avg_neg, param) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;
+ Author: Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function soc_pct = compute_soc(cs_avg_neg, param)</a>
+0002 
+0003 <span class="comment">% Copyright (c) 2018 Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</span>
+0004 <span class="comment">% Author: Gopalakrishnan, Krishnakumar &lt;krishnak@vt.edu&gt;</span>
+0005 
+0006 soc_num = (cs_avg_neg/param.cs_max_n) - param.theta_min_neg;
+0007 soc_denom = param.theta_max_neg - param.theta_min_neg;
+0008 
+0009 soc = soc_num/soc_denom; <span class="comment">% as a fraction between 0 and 1</span>
+0010 soc_pct = 100*soc; <span class="comment">% in percentage [%]</span>
+0011 
+0012 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sat 26-May-2018 17:01:07 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" target="_parent">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
