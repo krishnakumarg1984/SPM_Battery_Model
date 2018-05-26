@@ -5,7 +5,7 @@ profile_filename  = [load_profile_name,'.csv'];
 try
     C_rate_profile = csvread(profile_filename,profile_row_offset,0);
 catch
-    error('Invalid load profile specified. Quitting simulation ...');
+    error('Specified load profile not found in PATH. Quitting simulation ...');
 end
 
 % Compute expected end-time for allocation of storage & maximum loop indices
