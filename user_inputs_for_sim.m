@@ -10,8 +10,9 @@ load_profile_name = 'cnst_dischg_soc_100';
 soc_col            = 1; % The starting SOC is in this column of top row
 profile_row_offset = 2; % Load profile input data begins only from this row
 
-Ts       = 0.5; % sec (how often are results needed?)
-tf_user  = 100; % sec (user-entered desired simulation end-time)
+% Ts       = 0.5;  % sec (how often are results needed?)
+Ts       = 5e-2; % sec (for capacity characterisation)
+tf_user  = 100;  % sec (user-entered desired simulation end-time)
 % Simulation might prematurely end if voltage/soc cutoffs are hit
 
 termination_choice = 'max'; % valid choices are 'max' and 'min'

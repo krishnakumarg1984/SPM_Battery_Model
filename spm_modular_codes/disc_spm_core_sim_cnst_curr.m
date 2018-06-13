@@ -1,5 +1,6 @@
 %% Pre-Compute the System and Input Matrices
 clc;
+fprintf('Now simulating %3.2f C\n',C_rate);
 [~, A_disc, ~, B_disc] = AB_matrices_spm_three_states(spm_params,Ts);
 outputEqn  = @spm_three_states_battery_voltage;
 
@@ -22,7 +23,7 @@ q_pos_sim_results_spm(1)      = 0;
 q_neg_sim_results_spm(1)      = 0;
 
 % load current applied at t = t0
-load_current_vector(1) = I_1C*interp1(C_rate_profile(:,1),C_rate_profile(:,2),spm_sim_time_vector(1),'previous','extrap');
+load_current_vector(1) = I_1C*C_rate;
 
 x_spm_init = [q_pos_sim_results_spm(1); ...
               q_neg_sim_results_spm(1); ...
@@ -36,10 +37,11 @@ x_spm_local_finish = x_spm_init;
 clear x_init q_pos_init q_neg_init;
 
 %% Simulate the SPM
+fprintf('Simulating SPM ... \n');
 progressbarText(0);
 
 for k = 2:num_iterations  % Need solution at k-th time-step
-    load_current_vector(k)        = I_1C*interp1(C_rate_profile(:,1),C_rate_profile(:,2),spm_sim_time_vector(k-1),'previous','extrap'); % load current that was held constant from (k-1) to (k)
+    load_current_vector(k)        = I_1C*C_rate; % load current that was held constant from (k-1) to (k)
     x_spm_local_finish            = A_disc*x_spm_local_finish + B_disc*load_current_vector(k);
 
     q_pos_sim_results_spm(k)      = x_spm_local_finish(1);
