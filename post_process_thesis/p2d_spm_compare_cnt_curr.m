@@ -47,8 +47,10 @@ xlabel('time (s)');
 axes(ha(2*idx));
 xlabel('time (s)');
 
-custom_m2t_fcn('const_curr_dischg',[figW_cm,figH_cm]*10,[],false);
-% matlab2tikz('const_curr_dischg.tikz');
-% figure(1);shg;
+%% Export to Tikz
+extra_axis_options = 'xticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=0,/pgf/number format/fixed,/pgf/number format/fixed zerofill,},yticklabel style={/pgf/number format/1000 sep=,},';
+custom_m2t_fcn('const_curr_dischg_soc',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
+% custom_m2t_fcn('const_curr_dischg_voltage',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
+
 close;
 % vim: set nospell nowrap textwidth=0 wrapmargin=0 formatoptions-=t:
