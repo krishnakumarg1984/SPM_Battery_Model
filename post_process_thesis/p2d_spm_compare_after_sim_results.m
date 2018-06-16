@@ -40,7 +40,7 @@ run('setup_line_colors.m'); % deletes axes/clears plots
 [ha, pos] = tight_subplot_cm(n_axes_ht, n_axes_w, [gap_ht gap_w],[marg_ht_bottom marg_ht_top],[marg_w_left marg_w_right],figH_cm,figW_cm);
 
 %% load sim results
-load('p2d_sim_Jun_16_2018_23_21_38.mat'); % udds p2d
+load('p2d_sim_Jun_16_2018_23_47_38.mat'); % udds p2d
 load('disc_sim_Jun_16_2018_23_43_22.mat'); % udds spm
 
 t_end_max = max(spm_sim_time_vector(end),time_vector_p2d(end));
