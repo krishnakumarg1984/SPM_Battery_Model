@@ -20,7 +20,7 @@ cells_in_series = 96;        % no. of series-connected cells in pack
 dummy_param{1} = Parameters_init_suppliedSOC_pct(100); % 'dummy' param for lumped mass calculation for Northrop cell
 [~,~,mass_Northrop_cell,~] = compute_lumped_mass_and_Cp_avg_for_given_layer_fcn(dummy_param{1}.no_of_layers_Northrop_cell,dummy_param{1});
 
-cells_in_parallel_BEV = 16;       % no. of parallel-connected cells in each module
+cells_in_parallel_BEV = 3;       % no. of parallel-connected cells in each module
 no_of_cells_in_pack_BEV = cells_in_series*cells_in_parallel_BEV;  % total number of cells in pack
 pack_mass_chev_bolt_overhead_BEV = pack_mass_chev_bolt - mass_Northrop_cell*no_of_cells_in_pack_BEV;  % Computing pack mass less the mass of the cells, for the default Bolt configuraiton (kg)
 

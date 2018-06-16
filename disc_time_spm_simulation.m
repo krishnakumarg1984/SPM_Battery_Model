@@ -2,6 +2,7 @@
 % Author: Gopalakrishnan, Krishnakumar <krishnak@vt.edu>
 
 clear;clc; format short g; format compact; close all;
+
 %% Load user data, pre-process and run simulation loop
 run('user_inputs_for_sim.m');
 run('pre_process_script.m');
@@ -32,7 +33,7 @@ ylim([min(load_current_vector)-5 max(load_current_vector)+5]);
 
 h2 = subplot(212);
 plot(spm_sim_time_vector,v_cell_sim_results_spm,'m');
-ylim([spm_params.CutoffVoltage spm_params.CutoverVoltage]);
+% ylim([spm_params.CutoffVoltage spm_params.CutoverVoltage]);
 ylabel('Cell Voltage [V]');
 
 linkaxes([h1 h2],'x');
@@ -48,7 +49,7 @@ ylim([min(load_current_vector)-5 max(load_current_vector)+5]);
 
 h2 = subplot(212);
 plot(spm_sim_time_vector,soc_pct_results_spm,'r');
-ylabel('SOC [%]');
+ylabel('SOC [\%]');
 
 linkaxes([h1 h2],'x');
 xlim([spm_sim_time_vector(1) spm_sim_time_vector(end)]);

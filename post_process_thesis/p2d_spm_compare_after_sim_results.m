@@ -2,16 +2,18 @@
 % Author: Gopalakrishnan, Krishnakumar <krishnak@vt.edu>
 
 clear;clc; format short g; format compact; close all;
-golden_ratio = 1.618;
-ax_width_factor = 0.75;
-fig_ht_factor = 0.75;
 
-figW_cm = 15.74776*fig_width_factor; % textwidth (cm) reported by thesis latex doc from layouts package. Additonally include a scaling factor
+fig_width_factor = 0.8; 
+ax_width_factor = 0.75; % may need to modify suitably to prevent some of the dimensions from becoming negative
+
+figW_cm = 15.74776*fig_width_factor; % textwidth (cm) reported by thesis doc from layouts package. Additonally include a scaling factor
+golden_ratio = 1.618;
+% figH_cm = figW_cm/golden_ratio;
+fig_ht_factor = 0.85; % may need to modify suitably to prevent some of the dimensions from becoming negative
 figH_cm = 22.27184*fig_ht_factor; % textheight (cm) reported by thesis latex after leaving space for caption
 
-C_rate_choices = [0.2,0.5,1,3];
-n_axes_w = 2; % how many horizontal/width-wise axes?
-n_axes_ht = length(C_rate_choices);  % how many vertical axes?
+n_axes_w = 1; % how many horizontal/width-wise axes?
+n_axes_ht = 3;  % how many vertical axes?
 
 ax_width = (figW_cm/n_axes_w)*ax_width_factor;
 ax_height = ax_width/golden_ratio;
@@ -37,20 +39,15 @@ marg_ht_top = marg_ht_bottom*marg_ht_top_scale;
 run('setup_line_colors.m'); % deletes axes/clears plots
 [ha, pos] = tight_subplot_cm(n_axes_ht, n_axes_w, [gap_ht gap_w],[marg_ht_bottom marg_ht_top],[marg_w_left marg_w_right],figH_cm,figW_cm);
 
-for idx = 1:length(C_rate_choices)
-    C_rate = C_rate_choices(idx);
-    fcn_sim_spm_p2d_cnstcurr(idx,C_rate,ha,line_colors);
-end
+%% load sim results
+load('p2d_sim_Jun_16_2018_23_21_38.mat'); % udds p2d
+load('disc_sim_Jun_16_2018_23_43_22.mat'); % udds spm
 
-axes(ha(2*idx-1));
-xlabel('time (s)');
-axes(ha(2*idx));
-xlabel('time (s)');
+t_end_max = max(spm_sim_time_vector(end),time_vector_p2d(end));
+t_end_max_order = floor(log10(t_end_max));
+t_end_max_plot = ceil((t_end_max/10^t_end_max_order)/0.5)*0.5*10^t_end_max_order;
 
-%% Export to Tikz
-extra_axis_options = 'xticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=0,/pgf/number format/fixed,/pgf/number format/fixed zerofill,},yticklabel style={/pgf/number format/1000 sep=,},';
-custom_m2t_fcn('const_curr_dischg_soc',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
-% custom_m2t_fcn('const_curr_dischg_voltage',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
+t_end_common = min(spm_sim_time_vector(end),time_vector_p2d(end));
+t_common_vector = (0:Ts:t_end_common)';
+max_idx = length(t_common_vector);
 
-close;
-% vim: set nospell nowrap textwidth=0 wrapmargin=0 formatoptions-=t:

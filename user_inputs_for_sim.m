@@ -4,14 +4,15 @@ cellIdentifier = 'Northrop';
 
 % string describing starting soc% and csv filename of load profile (time vs current through external circuit)
 % a) 'cnst_dischg' b) 'cnst_chg' c) 'udds' etc
-load_profile_name = 'cnst_dischg_soc_100';
+% load_profile_name = 'cnst_dischg_soc_100';
+load_profile_name = 'udds_soc_50';
 
 % Input CSV-profile setup. Note: Offsets use a 0-base numbering system
 soc_col            = 1; % The starting SOC is in this column of top row
 profile_row_offset = 2; % Load profile input data begins only from this row
 
-% Ts       = 0.5;  % sec (how often are results needed?)
-Ts       = 5e-2; % sec (for capacity characterisation)
+Ts       = 1;  % sec (how often are results needed?)
+% Ts       = 5e-2; % sec (for capacity characterisation)
 tf_user  = 100;  % sec (user-entered desired simulation end-time)
 % Simulation might prematurely end if voltage/soc cutoffs are hit
 

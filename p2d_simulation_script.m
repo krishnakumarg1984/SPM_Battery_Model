@@ -32,7 +32,7 @@ ylim([min(load_curr_vector_p2d)-5 max(load_curr_vector_p2d)+5]);
 
 h2 = subplot(212);
 plot(time_vector_p2d,cell_voltage_results_p2d,'m');
-ylim([spm_params.CutoffVoltage spm_params.CutoverVoltage]);
+% ylim([spm_params.CutoffVoltage spm_params.CutoverVoltage]);
 ylabel('Cell Voltage [V]');
 
 linkaxes([h1 h2],'x');
@@ -48,7 +48,7 @@ ylim([min(load_curr_vector_p2d)-5 max(load_curr_vector_p2d)+5]);
 
 h2 = subplot(212);
 plot(time_vector_p2d,soc_pct_results_p2d,'r');
-ylabel('SOC [%]');
+ylabel('SOC [\%]');
 
 linkaxes([h1 h2],'x');
 xlim([time_vector_p2d(1) time_vector_p2d(end)]);
