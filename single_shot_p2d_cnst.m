@@ -3,7 +3,7 @@
 param_p2d{1} = Parameters_init_suppliedSOC_pct(soc_init_pct); % Refer to LIONSIMBA documentation for details of these settings
 param_p2d{1}.SolidPhaseDiffusion    = 3;
 param_p2d{1}.sim_datalog_interval   = Ts;
-param_p2d{1}.Scope                  = 0;
+param_p2d{1}.Scope                  = 1;
 param_p2d{1}.suppress_status_prints = 0;
 param_p2d{1}.PrintHeaderInfo = 0;
 param_p2d{1}.Nr_p = 15;param_p2d{1}.Nr_n = 15;
@@ -34,3 +34,4 @@ if param_p2d{1}.SolidPhaseDiffusion==1 || param_p2d{1}.SolidPhaseDiffusion==2
 else
     cs_avg_neg_results_p2d  = mean(results_p2d.cs_average{1}(:,param_p2d{1}.Np*param_p2d{1}.Nr_p+1:end),2);
 end
+ce_p2d = results_p2d.ce{1};
