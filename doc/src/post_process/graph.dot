@@ -1,6 +1,0 @@
-/* Created by mdot for Matlab */
-digraph m2html {
-
-  cts_disc_compare [URL="cts_disc_compare.html"];
-  plots_spm [URL="plots_spm.html"];
-}
