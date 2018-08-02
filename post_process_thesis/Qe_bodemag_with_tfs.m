@@ -99,12 +99,15 @@ set(0,'defaultaxesfontsize',12,'defaultlinelinewidth',2,'defaultpatchlinewidth',
 [ha, pos] = tight_subplot_cm(n_axes_ht, n_axes_w, [gap_ht gap_w],[marg_ht_bottom marg_ht_top],[marg_w_left marg_w_right],figH_cm,figW_cm);
 movegui('center');
 axes(ha(1));
-semilogx(w1,20 * log10(m1),'color',line_colors(1,:));
+semilogx(w1,20 * log10(m1),'color',line_colors(1,:)); hold on;
 load('Qen_tf_4p3z_scaled.mat');
-semilogx(w1,20 * log10(m1),'color',line_colors(1,:));
+[m_Tf,p_tf,w_tf]=bode(Qen_tfest_scaled);
+w_tf=squeeze(w_tf); m_Tf=squeeze(m_Tf);
+semilogx(w_tf,20 * log10(m_Tf/1000),'color',cbrewerdarkgray);
 xlabel('Frequency, $\omega$ (rad/s)');
 ylabel('dB');
 title('$|\widetilde{Q}_{\mathrm{e,n}_\mathrm{train}}| $');
+% return;
 
 xlim([1e-2 1e1]);
 xticks([1e-2 1e-1 1 10]);
@@ -113,7 +116,12 @@ ax_handle.YAxis.TickValues = linspace(ax_handle.YAxis.Limits(1),ax_handle.YAxis.
 % ax_handle.XAxis.TickValues = logspace(ax_handle.XAxis.Limits(1),ax_handle.XAxis.Limits(2),no_of_x_tick_points);
 
 axes(ha(2));
-semilogx(w2,20 * log10(m2),'color',line_colors(1,:));
+semilogx(w2,20 * log10(m2),'color',line_colors(1,:));hold on;
+load('Qep_tf_4p3z_scaled.mat');
+[m_Tf_val,p_tf_val,w_tf_val]=bode(Qep_tfest_scaled);
+w_tf_val=squeeze(w_tf_val); m_Tf_val=squeeze(m_Tf_val);
+semilogx(w_tf_val,20 * log10(m_Tf_val/1e4),'color',cbrewerdarkgray);
+
 xlabel('Frequency, $\omega$ (rad/s)');
 ylabel('dB');
 title('$|\widetilde{Q}_{\mathrm{e,p}_\mathrm{val}}| $');

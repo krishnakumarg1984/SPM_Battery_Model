@@ -2,6 +2,7 @@
 % Author: Gopalakrishnan, Krishnakumar <krishnak@vt.edu>
 
 clear;clc; format short g; format compact; close all;
+warning('off','all');
 
 %% Load user data, pre-process and run simulation loop
 run('user_inputs_for_sim.m');
@@ -9,6 +10,10 @@ run('pre_process_script.m');
 load('p2d_sim_Jul_09_2018_14_04_28');
 run('quadratic_ce_model_loop.m');
 run('postprocess_quadratic_results.m');
+
+run('tf_ce_model_loop.m');
+run('postprocess_tf_results.m');
+% return;
 
 %% Obtain ce interpolated at the right location
 z_neg_newconvention = linspace(param_p2d{1}.len_n/(2*param_p2d{1}.Nn),param_p2d{1}.len_n - (param_p2d{1}.len_n/(2*param_p2d{1}.Nn)),param_p2d{1}.Nn);
@@ -78,7 +83,9 @@ ce_p2d_tplot1 = [ce_neg_p2d_tplot1;ce_sep_p2d_tplot1;ce_pos_p2d_tplot1];
 plot(x_cell_p2d_plot_um,ce_p2d_tplot1,'color',line_colors(2,:));
 hold on;
 plot(x_cell_p2d_plot_um,ce_quadratic_tplot1,'color',line_colors(1,:));
-hold off;
+plot(x_cell_p2d_plot_um,ce_tf_tplot1);
+return;
+% hold off;
 lgd = legend('P2d','Quadratic','location','southwest');
 legend boxoff;
 xticks(1e6*[0 param_p2d{1}.len_n param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s+param_p2d{1}.len_p]);
