@@ -2,7 +2,7 @@
 % Author: Gopalakrishnan, Krishnakumar <krishnak@vt.edu>
 
 clear;clc; format short g; format compact; close all;
-warning('off','all');
+% warning('off','all');
 
 %% Load user data, pre-process and run simulation loop
 run('user_inputs_for_sim.m');
@@ -11,7 +11,9 @@ load('p2d_sim_Jul_09_2018_14_04_28');
 run('quadratic_ce_model_loop.m');
 run('postprocess_quadratic_results.m');
 
+run('setup_tf_model_parameters.m');
 run('tf_ce_model_loop.m');
+return;
 run('postprocess_tf_results.m');
 % return;
 
@@ -58,16 +60,18 @@ gap_ht = 1.25; % cm
 gap_w = 2.25; % cm
 
 run('setup_line_colors.m'); % deletes axes/clears plots
+cbrewer_Gnbubu_blue = [67,162,202]/255;
 
 %% Plot
 set(0,'defaultaxesfontsize',12 ...
-    ,'defaultaxeslinewidth',2 ...
+    ,'defaultaxeslinewidth',1 ...
     ,'defaultlinelinewidth',2 ...
     ,'defaultpatchlinewidth',1);
 annot_xloc = 0.65;
 annot_yloc = 0.8;
 
 [ha, pos] = tight_subplot_cm(n_axes_ht, n_axes_w, [gap_ht gap_w],[marg_ht_bottom marg_ht_top],[marg_w_left marg_w_right],figH_cm,figW_cm);
+movegui('center');
 
 axes(ha(1));
 ce_neg_tplot1_fittedObj = fit(z_neg_newconvention',ce_neg_p2d_newconvention(tplot1_idx,:)','smoothingspline');
@@ -83,10 +87,10 @@ ce_p2d_tplot1 = [ce_neg_p2d_tplot1;ce_sep_p2d_tplot1;ce_pos_p2d_tplot1];
 plot(x_cell_p2d_plot_um,ce_p2d_tplot1,'color',line_colors(2,:));
 hold on;
 plot(x_cell_p2d_plot_um,ce_quadratic_tplot1,'color',line_colors(1,:));
-plot(x_cell_p2d_plot_um,ce_tf_tplot1);
-return;
-% hold off;
-lgd = legend('P2d','Quadratic','location','southwest');
+plot(x_cell_p2d_plot_um,ce_tf_tplot1,'color',cbrewer_Gnbubu_blue);
+% return;
+hold off;
+lgd = legend('P2d','Quadratic','SysID','location','southwest');
 legend boxoff;
 xticks(1e6*[0 param_p2d{1}.len_n param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s+param_p2d{1}.len_p]);
 xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{tot}$'})
@@ -111,8 +115,9 @@ ce_p2d_tplot2 = [ce_neg_p2d_tplot2;ce_sep_p2d_tplot2;ce_pos_p2d_tplot2];
 plot(x_cell_p2d_plot_um,ce_p2d_tplot2,'color',line_colors(2,:));
 hold on;
 plot(x_cell_p2d_plot_um,ce_quadratic_tplot2,'color',line_colors(1,:));
+plot(x_cell_p2d_plot_um,ce_tf_tplot2,'color',cbrewer_Gnbubu_blue);
 hold off;
-lgd = legend('P2d','Quadratic','location','southwest');
+lgd = legend('P2d','Quadratic','SysID','location','southwest');
 legend boxoff;
 xticks(1e6*[0 param_p2d{1}.len_n param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s+param_p2d{1}.len_p]);
 xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{tot}$'})
@@ -122,6 +127,7 @@ line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.
 lgd.String(3:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot2_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
+% return;
 
 axes(ha(3));
 ce_neg_tplot3_fittedObj = fit(z_neg_newconvention',ce_neg_p2d_newconvention(tplot3_idx,:)','smoothingspline');
@@ -137,8 +143,9 @@ ce_p2d_tplot3 = [ce_neg_p2d_tplot3;ce_sep_p2d_tplot3;ce_pos_p2d_tplot3];
 plot(x_cell_p2d_plot_um,ce_p2d_tplot3,'color',line_colors(2,:));
 hold on;
 plot(x_cell_p2d_plot_um,ce_quadratic_tplot3,'color',line_colors(1,:));
+plot(x_cell_p2d_plot_um,ce_tf_tplot3,'color',cbrewer_Gnbubu_blue);
 hold off;
-lgd = legend('P2d','Quadratic','location','southwest');
+lgd = legend('P2d','Quadratic','SysID','location','southwest');
 legend boxoff;
 xticks(1e6*[0 param_p2d{1}.len_n param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s+param_p2d{1}.len_p]);
 xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{tot}$'})
@@ -148,6 +155,7 @@ line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.
 lgd.String(3:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot3_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
+% return;
 
 axes(ha(4));
 ce_neg_tplot4_fittedObj = fit(z_neg_newconvention',ce_neg_p2d_newconvention(tplot4_idx,:)','smoothingspline');
@@ -163,8 +171,9 @@ ce_p2d_tplot4 = [ce_neg_p2d_tplot4;ce_sep_p2d_tplot4;ce_pos_p2d_tplot4];
 plot(x_cell_p2d_plot_um,ce_p2d_tplot4,'color',line_colors(2,:));
 hold on;
 plot(x_cell_p2d_plot_um,ce_quadratic_tplot4,'color',line_colors(1,:));
+plot(x_cell_p2d_plot_um,ce_tf_tplot4,'color',cbrewer_Gnbubu_blue);
 hold off;
-lgd = legend('P2d','Quadratic','location','southwest');
+lgd = legend('P2d','Quadratic','SysID','location','southwest');
 legend boxoff;
 xticks(1e6*[0 param_p2d{1}.len_n param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s+param_p2d{1}.len_p]);
 xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{tot}$'})
@@ -174,6 +183,7 @@ line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.
 lgd.String(3:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot4_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
+% return;
 
 axes(ha(5));
 ce_neg_tplot5_fittedObj = fit(z_neg_newconvention',ce_neg_p2d_newconvention(tplot5_idx,:)','smoothingspline');
@@ -189,8 +199,9 @@ ce_p2d_tplot5 = [ce_neg_p2d_tplot5;ce_sep_p2d_tplot5;ce_pos_p2d_tplot5];
 plot(x_cell_p2d_plot_um,ce_p2d_tplot5,'color',line_colors(2,:));
 hold on;
 plot(x_cell_p2d_plot_um,ce_quadratic_tplot5,'color',line_colors(1,:));
+plot(x_cell_p2d_plot_um,ce_tf_tplot5,'color',cbrewer_Gnbubu_blue);
 hold off;
-lgd = legend('P2d','Quadratic','location','southwest');
+lgd = legend('P2d','Quadratic','SysID','location','southwest');
 legend boxoff;
 xticks(1e6*[0 param_p2d{1}.len_n param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s+param_p2d{1}.len_p]);
 xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{tot}$'})
@@ -200,6 +211,7 @@ line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.
 lgd.String(3:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot5_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
+% return;
 
 axes(ha(6));
 ce_neg_tplot6_fittedObj = fit(z_neg_newconvention',ce_neg_p2d_newconvention(tplot6_idx,:)','smoothingspline');
@@ -215,10 +227,11 @@ ce_p2d_tplot6 = [ce_neg_p2d_tplot6;ce_sep_p2d_tplot6;ce_pos_p2d_tplot6];
 plot(x_cell_p2d_plot_um,ce_p2d_tplot6,'color',line_colors(2,:));
 hold on;
 plot(x_cell_p2d_plot_um,ce_quadratic_tplot6,'color',line_colors(1,:));
+plot(x_cell_p2d_plot_um,ce_tf_tplot6,'color',cbrewer_Gnbubu_blue);
 hold off;
 
 linkaxes(ha,'x');
-lgd = legend('P2d','Quadratic','location','southwest');
+lgd = legend('P2d','Quadratic','SysID','location','southwest');
 legend boxoff;
 xticks(1e6*[0 param_p2d{1}.len_n param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s+param_p2d{1}.len_p]);
 xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{tot}$'})
