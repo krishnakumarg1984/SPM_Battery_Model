@@ -13,7 +13,7 @@ run('postprocess_quadratic_results.m');
 
 run('setup_tf_model_parameters.m');
 run('tf_ce_model_loop.m');
-return;
+% return;
 run('postprocess_tf_results.m');
 % return;
 
@@ -39,7 +39,7 @@ ce_sep_p2d_newconvention = fliplr(ce_sep_p2d);
 ce_pos_p2d_newconvention = fliplr(ce_pos_p2d);
 
 % cep2d_newconvention = [ce_neg_p2d_newconvention,ce_sep_p2d_newconvention,ce_pos_p2d_newconvention];
-% return;
+return;
 %% Plot setup
 golden_ratio = 1.618;
 fig_width_factor = 1;
@@ -97,7 +97,7 @@ xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{
 xlim([0 x_cell_p2d_plot_um(end)]);
 line(1e6*[param_p2d{1}.len_n param_p2d{1}.len_n],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
 line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
-lgd.String(3:end) = [];
+lgd.String(end-1:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot1_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
 
@@ -124,7 +124,7 @@ xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{
 xlim([0 x_cell_p2d_plot_um(end)]);
 line(1e6*[param_p2d{1}.len_n param_p2d{1}.len_n],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
 line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
-lgd.String(3:end) = [];
+lgd.String(end-1:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot2_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
 % return;
@@ -152,7 +152,7 @@ xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{
 xlim([0 x_cell_p2d_plot_um(end)]);
 line(1e6*[param_p2d{1}.len_n param_p2d{1}.len_n],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
 line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
-lgd.String(3:end) = [];
+lgd.String(end-1:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot3_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
 % return;
@@ -180,7 +180,7 @@ xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{
 xlim([0 x_cell_p2d_plot_um(end)]);
 line(1e6*[param_p2d{1}.len_n param_p2d{1}.len_n],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
 line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
-lgd.String(3:end) = [];
+lgd.String(end-1:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot4_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
 % return;
@@ -208,7 +208,7 @@ xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{
 xlim([0 x_cell_p2d_plot_um(end)]);
 line(1e6*[param_p2d{1}.len_n param_p2d{1}.len_n],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
 line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
-lgd.String(3:end) = [];
+lgd.String(end-1:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot5_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
 % return;
@@ -238,11 +238,11 @@ xticklabels({'0','$l_\mathrm{n}$','$l_\mathrm{n}\! + l_\mathrm{s}$','$l_\mathrm{
 xlim([0 x_cell_p2d_plot_um(end)]);
 line(1e6*[param_p2d{1}.len_n param_p2d{1}.len_n],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
 line(1e6*[param_p2d{1}.len_n+param_p2d{1}.len_s param_p2d{1}.len_n+param_p2d{1}.len_s],get(gca,'YLim'),'linestyle','--','linewidth',0.5,'color','k');
-lgd.String(3:end) = [];
+lgd.String(end-1:end) = [];
 text(annot_xloc,annot_yloc,['t = ' num2str(time_vector_p2d(tplot6_idx)) ' s'],'Units','normalized');
 ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
 
 return;
 cleanfigure;
 extra_axis_options = 'yticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=2, /pgf/number format/fixed, }';
-custom_m2t_fcn('quadratic_ce_approx_spatial',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
+custom_m2t_fcn('tf_quadratic_ce_approx_spatial',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
