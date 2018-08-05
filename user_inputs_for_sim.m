@@ -4,8 +4,8 @@ cellIdentifier = 'Northrop';
 
 % string describing starting soc% and csv filename of load profile (time vs current through external circuit)
 % a) 'cnst_dischg' b) 'cnst_chg' c) 'udds' etc
-load_profile_name = 'cnst_dischg_soc_100_1C';
-% load_profile_name = 'udds_soc_50';
+% load_profile_name = 'cnst_dischg_soc_100_1C';
+load_profile_name = 'udds_soc_50';
 
 % Input CSV-profile setup. Note: Offsets use a 0-base numbering system
 soc_col            = 1; % The starting SOC is in this column of top row

@@ -40,7 +40,7 @@ ce_sep_p2d_newconvention = fliplr(ce_sep_p2d);
 ce_pos_p2d_newconvention = fliplr(ce_pos_p2d);
 
 % cep2d_newconvention = [ce_neg_p2d_newconvention,ce_sep_p2d_newconvention,ce_pos_p2d_newconvention];
-return;
+% return;
 %% Plot setup
 golden_ratio = 1.618;
 fig_width_factor = 1;
@@ -246,4 +246,4 @@ ylabel('$c_e\, (\mathrm{mol\, m}^{-3})$');
 return;
 cleanfigure;
 extra_axis_options = 'yticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=2, /pgf/number format/fixed, }';
-custom_m2t_fcn('tf_quadratic_ce_approx_spatial',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
+custom_m2t_fcn('udds_tf_quadratic_ce_approx_spatial',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
