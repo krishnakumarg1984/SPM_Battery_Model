@@ -40,8 +40,8 @@ run('setup_line_colors.m'); % deletes axes/clears plots
 cbrewerintergray = [189,189,189]/255;
 cbrewerdarkgray = [99,99,99]/255;
 cbrewer_Gnbubu_blue = [67,162,202]/255;
-% [ha, pos] = tight_subplot_cm(n_axes_ht, n_axes_w, [gap_ht gap_w],[marg_ht_bottom marg_ht_top],[marg_w_left marg_w_right],figH_cm,figW_cm);
-% movegui('center');
+[ha, pos] = tight_subplot_cm(n_axes_ht, n_axes_w, [gap_ht gap_w],[marg_ht_bottom marg_ht_top],[marg_w_left marg_w_right],figH_cm,figW_cm);
+movegui('center');
 
 %% Post-process and plot
 no_of_x_tick_points = 5;
@@ -53,8 +53,8 @@ t_end_max_plot = ceil((t_end_max/10^t_end_max_order)/0.5)*0.5*10^t_end_max_order
 
 clc;
 
-% axes(ha(1));
-subplot(221);
+axes(ha(1));
+% subplot(221);
 plot(time_vector_p2d,ce_neg_p2d_newconvention(:,1),'color',cbrewerdarkgray); 
 hold on;
 plot(quadratic_ce_sim_time_vector,ce_neg_cc_quadratic,'color',line_colors(1,:));

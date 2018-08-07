@@ -6,6 +6,7 @@ Np = Nn;
 z_neg = linspace(0,Ln,Nn);
 z_sep = linspace(0,Ls,Ns);
 z_pos = linspace(0,Lp,Np);
+
 %% Post-Process tf Results
 a0_tf_vector = a_tf_vector_results(1,:);
 a2_tf_vector = a_tf_vector_results(2,:);
@@ -18,6 +19,10 @@ a8_tf_vector = a_tf_vector_results(7,:);
 % Assemble tf results at a given spatial point for all time
 ce_neg_cc_tf = compute_ce_neg_tf(a2_tf_vector,a0_tf_vector,0);
 ce_neg_sep_tf = compute_ce_neg_tf(a2_tf_vector,a0_tf_vector,Ln);
+
+% ce_sep_tf_0 = compute_ce_sep_tf(a5_tf_vector,a4_tf_vector,a3_tf_vector,0);
+ce_sep_tf_0p5Ls = compute_ce_sep_tf(a5_tf_vector,a4_tf_vector,a3_tf_vector,0.5*Ls);
+% ce_sep_tf_Ls = compute_ce_sep_tf(a5_tf_vector,a4_tf_vector,a3_tf_vector,Ls);
 
 ce_pos_cc_tf = compute_ce_pos_tf(a8_tf_vector,a6_tf_vector,0);
 ce_pos_sep_tf = compute_ce_pos_tf(a8_tf_vector,a6_tf_vector,Lp);

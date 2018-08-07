@@ -8,6 +8,10 @@ param_p2d{1}.suppress_status_prints = 0;
 param_p2d{1}.PrintHeaderInfo = 0;
 param_p2d{1}.Nr_p = 15;param_p2d{1}.Nr_n = 15;
 
+% For accurate phie_computation (comment out otherwise)
+param_p2d{1}.Np = 30;
+param_p2d{1}.Ns = 30;
+param_p2d{1}.Nn = 30;
 %% Allocate storage & Initialise P2D model
 time_vector_p2d          = [];
 load_curr_vector_p2d     = [];
