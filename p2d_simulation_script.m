@@ -20,7 +20,9 @@ soc_init_pct_savestr = strrep(num2str(soc_init_pct),'.','p');
 clear soc_init_pct C_rate_profile I_1C k num_iterations; % redundant info
 clear t_local_finish t_local_start;
 save([save_foldername, '/p2d_sim_', ...
-      datestr(now, 'mmm_dd_yyyy_HH_MM_SS')]); % save workspace to file
+    datestr(now, 'mmm_dd_yyyy_HH_MM_SS')]); % save workspace to file
+
+return;
 
 %% Plot results
 close all;

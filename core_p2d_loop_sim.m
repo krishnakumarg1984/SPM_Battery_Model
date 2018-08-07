@@ -15,6 +15,7 @@ cell_voltage_results_p2d = [];
 soc_pct_results_p2d      = [];
 cs_avg_neg_results_p2d   = [];
 ce_results_p2d           = [];
+phie_results_p2d         = [];
 
 % Initialize the states and their time derivatives
 initialState_p2d.Y  = [];
@@ -31,7 +32,7 @@ I_1C_p2d = param_p2d{1}.i_1C_density*param_p2d{1}.overall_surface_area_for_given
 
 for k = 1:num_iterations-1
     I_load = I_1C_p2d*interp1(C_rate_profile(:,1),C_rate_profile(:,2),t_local_start,'previous','extrap');
-
+    
     t_local_finish = t_local_start + Ts;
     results_p2d = startSimulation(t_local_start,t_local_finish,initialState_p2d,-I_load/param_p2d{1}.overall_surface_area_for_given_layers,param_p2d);
     
@@ -42,6 +43,7 @@ for k = 1:num_iterations-1
         cell_voltage_results_p2d      = [cell_voltage_results_p2d;results_p2d.Voltage{1}];
         soc_pct_results_p2d           = [soc_pct_results_p2d;results_p2d.SOC{1}];
         ce_results_p2d                = [ce_results_p2d;results_p2d.ce{1}];
+        phie_results_p2d              = [phie_results_p2d;results_p2d.Phie{1}];
         if param_p2d{1}.SolidPhaseDiffusion==1 || param_p2d{1}.SolidPhaseDiffusion==2
             cs_avg_neg_results_p2d  = [cs_avg_neg_results_p2d;mean(results_p2d.cs_average{1}(:,param_p2d{1}.Np+1:end),2)];
         else
@@ -53,6 +55,7 @@ for k = 1:num_iterations-1
         cell_voltage_results_p2d     = [cell_voltage_results_p2d;results_p2d.Voltage{1}(end)];
         soc_pct_results_p2d          = [soc_pct_results_p2d;results_p2d.SOC{1}(end)];
         ce_results_p2d               = [ce_results_p2d;results_p2d.ce{1}(end,:)];
+        phie_results_p2d             = [phie_results_p2d;results_p2d.Phie{1}(end,:)];
         if param_p2d{1}.SolidPhaseDiffusion==1 || param_p2d{1}.SolidPhaseDiffusion==2
             cs_avg_neg_results_p2d = [cs_avg_neg_results_p2d;mean(results_p2d.cs_average{1}(end,param_p2d{1}.Np+1:end),2)];
         else
