@@ -5,11 +5,11 @@ clear;clc; format short g; format compact; close all;
 % warning('off','all');
 
 %% Load user data, pre-process and run simulation loop
-% load('p2d_sim_Jul_09_2018_14_04_28'); % constant current dischg
-% load('p2d_sim_Aug_07_2018_12_58_11'); % constant current dischg with phie results
-% load('p2d_sim_Aug_07_2018_14_18_19'); % constant current dischg with phie results with 30 nodes
+% load('p2d_sim_Jul_09_2018_14_04_28'); % 1C constant current dischg
+% load('p2d_sim_Aug_07_2018_12_58_11'); % 1C constant current dischg with phie results
+load('p2d_sim_Aug_07_2018_14_18_19'); % 1C constant current dischg with phie results with 30 nodes
 
-load('p2d_sim_Aug_07_2018_14_50_00'); % udds beginning at 50 percent soc with phie and 30 nodes each
+% load('p2d_sim_Aug_07_2018_14_50_00'); % udds beginning at 50 percent soc with phie and 30 nodes each
 run('user_inputs_for_sim.m');
 run('pre_process_script.m');
 
@@ -54,7 +54,7 @@ if exist(save_foldername,'dir')==0
     mkdir(save_foldername);
 end
 save([save_foldername,'/phie_sysid_'...
-    datestr(now, 'mmm_dd_yyyy_HH_MM_SS')],'phie_op_vector_results'); % save workspace to file
+    datestr(now, 'mmm_dd_yyyy_HH_MM_SS')],'phie_op_vector_results','phie_op_term1_vector','phie_op_term2_vector'); % save workspace to file
 return;
 
 
@@ -104,7 +104,7 @@ if strcmp(load_profile_name,'udds_soc_50')
     MagInset(fig_h,-1,[600 700 -0.09 0.15],[175 875 0.25 0.48],{'NW','SW';'NE','SE'});
 end
 
-% return;
+return;
 
 %%
 extra_axis_options = 'xticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=0,/pgf/number format/fixed,/pgf/number format/fixed zerofill,},yticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=2, /pgf/number format/fixed, }, ylabel absolute, ylabel style={rotate=-90}';
