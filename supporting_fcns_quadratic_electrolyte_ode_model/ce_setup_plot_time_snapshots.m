@@ -1,4 +1,4 @@
-if load_profile_name~='udds_soc_50'
+if strcmp(load_profile_name,'udds_soc_50')==0
     t_plot1 = 0.001*t_end_common;
     t_plot2 = 0.005*t_end_common;
     t_plot3 = 0.1*t_end_common;

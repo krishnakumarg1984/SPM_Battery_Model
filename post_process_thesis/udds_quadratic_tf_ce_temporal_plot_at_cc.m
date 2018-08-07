@@ -13,7 +13,7 @@ fig_ht_factor = 0.8;
 figW_cm = 15.74776*fig_width_factor;     % textwidth (cm) reported by LaTeX doc with a scaling factor
 figH_cm = figW_cm/golden_ratio;
 
-n_axes_w = 2; % how many horizontal/width-wise axes?
+n_axes_w = 2;   % how many horizontal/width-wise axes?
 n_axes_ht = 2;  % how many vertical axes?
 
 ax_width = (figW_cm/n_axes_w)*ax_width_factor;
@@ -61,7 +61,7 @@ lgd_yoffset = 0;
 plt_lw = 1.25;
 axes(ha(1));
 % subplot(221);
-plot(time_vector_p2d,ce_neg_p2d_newconvention(:,1),'color',line_colors(2,:),'linewidth',plt_lw); 
+plot(time_vector_p2d,ce_neg_p2d_newconvention(:,1),'color',line_colors(2,:),'linewidth',plt_lw);
 hold on;
 plot(quadratic_ce_sim_time_vector,ce_neg_cc_quadratic,'color',line_colors(1,:),'linewidth',plt_lw);
 plot(tf_ce_sim_time_vector,ce_neg_cc_tf,'color',cbrewer_Gnbubu_blue,'linewidth',plt_lw);
@@ -82,7 +82,7 @@ set(gca, 'XTickLabel', cellstr(num2str(curtick(:)))); % remove scientific multip
 
 axes(ha(2));
 % subplot(222);
-plot(time_vector_p2d,ce_pos_p2d_newconvention(:,end),'color',line_colors(2,:),'linewidth',plt_lw); 
+plot(time_vector_p2d,ce_pos_p2d_newconvention(:,end),'color',line_colors(2,:),'linewidth',plt_lw);
 hold on;
 plot(quadratic_ce_sim_time_vector,ce_pos_cc_quadratic,'color',line_colors(1,:),'linewidth',plt_lw);
 plot(tf_ce_sim_time_vector,ce_pos_cc_tf,'color',cbrewer_Gnbubu_blue,'linewidth',plt_lw);
@@ -105,10 +105,16 @@ set(gca, 'XTickLabel', cellstr(num2str(curtick(:)))); % remove scientific multip
 axes(ha(3));
 % subplot(223);
 plot(t_common,abs(ce_neg_p2d_newconvention(1:length(t_common),1) - ce_neg_cc_quadratic(1:length(t_common))'),'color','k','linewidth',plt_lw);
-% plot(t_common,(ce_neg_cc_quadratic(1:length(t_common))' - ce_neg_p2d_newconvention(1:length(t_common),1))*100./ce_neg_p2d_newconvention(1:length(t_common),1),'color','k');
+max_abs_quad_error_neg = max(abs(ce_neg_p2d_newconvention(1:length(t_common),end) - ce_neg_cc_quadratic(1:length(t_common))'))
+mean_abs_quad_error_neg = mean(abs(ce_neg_p2d_newconvention(1:length(t_common),end) - ce_neg_cc_quadratic(1:length(t_common))'))
+median_abs_quad_error_neg = median(abs(ce_neg_p2d_newconvention(1:length(t_common),end) - ce_neg_cc_quadratic(1:length(t_common))'))
+std_abs_quad_error_neg = std(abs(ce_neg_p2d_newconvention(1:length(t_common),end) - ce_neg_cc_quadratic(1:length(t_common))'))
 hold on;
 plot(t_common,abs(ce_neg_p2d_newconvention(1:length(t_common),1) - ce_neg_cc_tf(1:length(t_common))'),'color',cbrewer_Gnbubu_blue,'linewidth',plt_lw);
-% plot(t_common,(ce_neg_cc_tf(1:length(t_common))' - ce_neg_p2d_newconvention(1:length(t_common),1))*100./ce_neg_p2d_newconvention(1:length(t_common),1) ,'color',cbrewer_Gnbubu_blue);
+max_abs_tf_error_neg = max(abs(ce_neg_p2d_newconvention(1:length(t_common),end) - ce_neg_cc_tf(1:length(t_common))'))
+mean_abs_tf_error_neg = mean(abs(ce_neg_p2d_newconvention(1:length(t_common),end) - ce_neg_cc_tf(1:length(t_common))'))
+median_abs_tf_error_neg = median(abs(ce_neg_p2d_newconvention(1:length(t_common),end) - ce_neg_cc_tf(1:length(t_common))'))
+std_abs_tf_error_neg = std(abs(ce_neg_p2d_newconvention(1:length(t_common),end) - ce_neg_cc_tf(1:length(t_common))'))
 hold off;
 ylabel('$\mathrm{mol\, m}^{-3}$');
 title('$|\varepsilon_{c_{\mathrm{e,negcc}}}|$');
@@ -127,9 +133,17 @@ xlabel('time (s)');
 
 axes(ha(4));
 % subplot(224);
-plot(t_common,abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_quadratic(1:length(t_common))'),'color','k','linewidth',plt_lw); 
+plot(t_common,abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_quadratic(1:length(t_common))'),'color','k','linewidth',plt_lw);
+max_abs_quad_error_pos = max(abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_quadratic(1:length(t_common))'))
+mean_abs_quad_error_pos = mean(abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_quadratic(1:length(t_common))'))
+median_abs_quad_error_pos = median(abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_quadratic(1:length(t_common))'))
+std_abs_quad_error_pos = std(abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_quadratic(1:length(t_common))'))
 hold on;
-plot(t_common,abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_tf(1:length(t_common))'),'color',cbrewer_Gnbubu_blue,'linewidth',plt_lw); 
+plot(t_common,abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_tf(1:length(t_common))'),'color',cbrewer_Gnbubu_blue,'linewidth',plt_lw);
+max_abs_tf_error_pos = max(abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_tf(1:length(t_common))'))
+mean_abs_tf_error_pos = mean(abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_tf(1:length(t_common))'))
+median_abs_tf_error_pos = median(abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_tf(1:length(t_common))'))
+std_abs_tf_error_pos = std(abs(ce_pos_p2d_newconvention(1:length(t_common),end) - ce_pos_cc_tf(1:length(t_common))'))
 hold off;
 ylabel('$\mathrm{mol\, m}^{-3}$');
 title('$|\varepsilon_{c_{\mathrm{e,poscc}}}|$');
@@ -147,7 +161,7 @@ set(gca, 'XTickLabel', cellstr(num2str(curtick(:)))); % remove scientific multip
 xlabel('time (s)');
 
 % maximize;
-% return;
+return;
 extra_axis_options = 'legend style={font=\footnotesize},title style={yshift=-1.75ex,},xticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=0,/pgf/number format/fixed,/pgf/number format/fixed zerofill,},yticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=2, /pgf/number format/fixed, }, ylabel absolute,';
 custom_m2t_fcn('tf_quad_ce_at_cc_udds',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
 close;

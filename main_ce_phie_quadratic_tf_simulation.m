@@ -14,9 +14,9 @@ run('postprocess_quadratic_results.m');
 
 run('setup_tf_model_parameters.m');
 run('tf_ce_model_loop.m');
-% return;
 run('postprocess_tf_results.m');
-% run('compute_phie_op_tf.m');
+return;
+run('compute_phie_op_tf.m');
 % return;
 
 %% Obtain ce interpolated at the right location
