@@ -22,6 +22,7 @@ clear x_spm_init x_spm_local_finish t_local_finish t_local_start;
 save([save_foldername, '/cts_sim_', ...
       datestr(now, 'mmm_dd_yyyy_HH_MM_SS')]); % save workspace to file
 
+return;
 %% Plot results
 close all;
 figure(1);

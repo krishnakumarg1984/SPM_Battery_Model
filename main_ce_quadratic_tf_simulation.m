@@ -7,7 +7,7 @@ clear;clc; format short g; format compact; close all;
 %% Load user data, pre-process and run simulation loop
 run('user_inputs_for_sim.m');
 run('pre_process_script.m');
-load('p2d_sim_Jul_09_2018_14_04_28'); % constant current dischg
+% load('p2d_sim_Jul_09_2018_14_04_28'); % 1C constant current dischg
 % load('p2d_sim_Aug_05_2018_18_58_34'); % udds beginning at 50 percent soc
 run('quadratic_ce_model_loop.m');
 run('postprocess_quadratic_results.m');
