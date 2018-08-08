@@ -49,13 +49,13 @@ phie_sep_p2d = phie_results_p2d(:,param_p2d{1}.Np+1:param_p2d{1}.Np+param_p2d{1}
 phie_neg_p2d = phie_results_p2d(:,param_p2d{1}.Np+param_p2d{1}.Ns+1:end);
 
 phie_diff_p2d_newconvention = phie_pos_p2d(:,1) - phie_neg_p2d(:,end);
-save_foldername = ['phie_op_results/', cellIdentifier, '/', load_profile_name];
-if exist(save_foldername,'dir')==0
-    mkdir(save_foldername);
-end
-save([save_foldername,'/phie_sysid_'...
-    datestr(now, 'mmm_dd_yyyy_HH_MM_SS')],'phie_op_vector_results','phie_op_term1_vector','phie_op_term2_vector'); % save workspace to file
-return;
+% save_foldername = ['phie_op_results/', cellIdentifier, '/', load_profile_name];
+% if exist(save_foldername,'dir')==0
+%     mkdir(save_foldername);
+% end
+% save([save_foldername,'/phie_sysid_'...
+%     datestr(now, 'mmm_dd_yyyy_HH_MM_SS')],'phie_op_vector_results','phie_op_term1_vector','phie_op_term2_vector'); % save workspace to file
+% return;
 
 
 %% Setup plots
@@ -64,19 +64,19 @@ run('setup_line_colors.m'); % deletes axes/clears plots
 cbrewerintergray = [189,189,189]/255;
 cbrewerdarkgray = [99,99,99]/255;
 cbrewer_Gnbubu_blue = [67,162,202]/255;
-no_of_x_tick_points = 8;
+no_of_x_tick_points = 6;
 no_of_y_tick_points = 6;
 
 clc;
 fig_h = clf;
 fig_h.Units = 'centimeters';
-fig_width_factor = 1; % scaling factor wrt to text width
+fig_width_factor = 0.75; % scaling factor wrt to text width
 figW_cm = 15.74776*fig_width_factor;     % textwidth (cm) reported by LaTeX doc with a scaling factor
 figH_cm = figW_cm/golden_ratio;
 if strcmp(load_profile_name,'cnst_dischg_soc_100_1C')
-    set(0,'defaultlinelinewidth',2,'defaultpatchlinewidth',0.5,'defaultaxeslinewidth',1);
+    set(0,'defaultaxesfontsize',12,'defaultlinelinewidth',2,'defaultpatchlinewidth',0.5,'defaultaxeslinewidth',1);
 else
-    set(0,'defaultlinelinewidth',1,'defaultpatchlinewidth',0.5,'defaultaxeslinewidth',1);
+    set(0,'defaultaxesfontsize',12,'defaultlinelinewidth',1,'defaultpatchlinewidth',0.5,'defaultaxeslinewidth',1);
 end
 fig_h.Position = [fig_h.Position(1),fig_h.Position(2),figW_cm,figH_cm];
 movegui('center');
@@ -86,12 +86,16 @@ plot(time_vector_p2d,phie_diff_p2d_newconvention,'color',cbrewerdarkgray);
 hold on;
 plot(tf_ce_sim_time_vector,phie_op_vector_results,'color',cbrewer_Gnbubu_blue);
 hold off;
-ylabel('$(V)\qquad$');
+ylabel('V $\quad$');
 set(get(gca,'ylabel'),'rotation',0);
 title('$\Delta\phi_\mathrm{e}(t) = \phi_\mathrm{e,poscc}(t) - \phi_\mathrm{e,negcc}(t)$');
-lgd = legend('P2d','SysID','location','northeast');
-legend boxoff;
-xlabel('time (s)');
+% lgd = legend('P2d','SysID','location','northeast');
+% legend boxoff;
+% xlabel('time (s)');
+text_x = 0.325;
+text(text_x,0.725,'P2d model','Units','Normalized');
+text(text_x,0.53,'SysID model','Units','Normalized');
+
 ax_handle = gca;
 ax_handle.YAxis.TickValues = linspace(ax_handle.YAxis.Limits(1),ax_handle.YAxis.Limits(2),no_of_y_tick_points); % not for voltage
 ax_handle.XAxis.TickValues = linspace(ax_handle.XAxis.Limits(1),ax_handle.XAxis.Limits(2),no_of_x_tick_points);
@@ -104,13 +108,13 @@ if strcmp(load_profile_name,'udds_soc_50')
     MagInset(fig_h,-1,[600 700 -0.09 0.15],[175 875 0.25 0.48],{'NW','SW';'NE','SE'});
 end
 
-return;
+% return;
 
 %%
-extra_axis_options = 'xticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=0,/pgf/number format/fixed,/pgf/number format/fixed zerofill,},yticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=2, /pgf/number format/fixed, }, ylabel absolute, ylabel style={rotate=-90}';
+extra_axis_options = 'xticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=0,/pgf/number format/fixed,/pgf/number format/fixed zerofill,},yticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=2, /pgf/number format/fixed, /pgf/number format/fixed zerofill,}, ylabel absolute, ylabel style={rotate=-90}';
 if strcmp(load_profile_name,'cnst_dischg_soc_100_1C')
     custom_m2t_fcn('phie_delta_cnst_1C',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
 elseif strcmp(load_profile_name,'udds_soc_50')
     custom_m2t_fcn('phie_delta_udds',[figW_cm,figH_cm]*10,[],false,extra_axis_options);
 end
-% close;
+close;
