@@ -9,7 +9,10 @@ clear;clc; format short g; format compact; close all;
 % load('p2d_sim_Aug_07_2018_12_58_11'); % 1C constant current dischg with phie results (p2d)
 % load('p2d_sim_Aug_07_2018_14_18_19'); % 1C constant current dischg with phie results with 30 nodes (p2d)
 
+load('p2d_sim_Aug_08_2018_21_45_58');   % 3C const curr dischg with phie results and 30 nodes (p2d) 
+
 % load('p2d_sim_Aug_07_2018_14_50_00'); % udds beginning at 50 percent soc with phie and 30 nodes each (p2d)
+
 run('user_inputs_for_sim.m');
 run('pre_process_script.m');
 
@@ -53,7 +56,7 @@ save_foldername = ['phie_op_results/', cellIdentifier, '/', load_profile_name];
 if exist(save_foldername,'dir')==0
     mkdir(save_foldername);
 end
-save([save_foldername,'/phie_sysid_'...
+save([save_foldername,'/phie_sysid_',load_profile_name,...
     datestr(now, 'mmm_dd_yyyy_HH_MM_SS')],'phie_op_vector_results','phie_op_term1_vector','phie_op_term2_vector'); % save workspace to file
 return;
 
