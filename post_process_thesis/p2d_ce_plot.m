@@ -21,7 +21,6 @@ clc;
 t_plot_transient_choices = [5,10,20];
 t_plot_transient_indices = find(ismember(time_vector_p2d,t_plot_transient_choices));
 
-
 fig_h = clf;
 fig_h.Units = 'centimeters';
 figW_cm = 15.74776*fig_width_factor;     % textwidth (cm) reported by LaTeX doc with a scaling factor

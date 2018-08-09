@@ -14,13 +14,17 @@ step_tf = 1;
 while step_tf <= no_of_steps
     I_load_t = I_load_vector(step_tf);
     
-    if ce_pos_cc_tf(step_tf)<0
-        ce_pos_cc_tf(step_tf) = 0;
+    if (ce_pos_cc_tf(step_tf)<=0) || (ce_neg_cc_tf(step_tf)<=0)
+        if ce_pos_cc_tf(step_tf)<=0
+            ce_pos_cc_tf(step_tf) = 0;
+        end
+        if ce_neg_cc_tf(step_tf)<=0
+            ce_neg_cc_tf(step_tf) = 0;
+        end
+        phie_op_term1 = phie_op_term1_vector(step_tf-1);
+    else
+        phie_op_term1 = (1-t_plus)*(2*R*T/F)*log(ce_pos_cc_tf(step_tf)./ce_neg_cc_tf(step_tf));
     end
-    if ce_neg_cc_tf(step_tf)<0
-        ce_neg_cc_tf(step_tf) = 0;
-    end
-    phie_op_term1 = (1-t_plus)*(2*R*T/F)*log(ce_pos_cc_tf(step_tf)./ce_neg_cc_tf(step_tf));
     phie_op_term1_vector(step_tf) = phie_op_term1;
     %     kappa_eff_neg = electrolyteConductivity(ce_neg_cc_tf(step_tf), T, ce_tf_subsys_params, 'n');
     %     kappa_eff_sep = electrolyteConductivity(ce_sep_tf_0p5Ls(step_tf), T, ce_tf_subsys_params, 's');

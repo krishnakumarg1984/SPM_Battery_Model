@@ -30,31 +30,32 @@ no_of_y_tick_points = 5;
 
 clc;
 
-load('p2d_sim_Aug_07_2018_14_18_19.mat'); % 1C constant current with 30 nodes (p2d)
-load('cts_sim_Aug_08_2018_21_08_54.mat'); % 1C constant current (spm);
-load('phie_sysid_Aug_07_2018_22_38_15.mat'); % 1C electrolyte overpotential
+load('p2d_sim_Aug_07_2018_14_50_00.mat'); % udds with 30 nodes (p2d)
+load('cts_sim_Aug_08_2018_16_40_43.mat'); % udds (spm);
+load('phie_sysid_Aug_07_2018_16_13_28.mat'); % udds electrolyte overpotential
 pos1 = [0.2 0.575 axis_w_factor axis_h_factor]; % left, bottom, width, height
 subplot('Position',pos1);
 plot(time_vector_p2d,cell_voltage_results_p2d,'color',cbrewerdarkgray);
 hold on;
 max_valid_idx_with_phie = min([length(v_cell_sim_results_spm),length(phie_op_vector_results)]);
-v_cell_spm_with_phie = v_cell_sim_results_spm + (phie_op_vector_results(1:max_valid_idx_with_phie))';
+phie_op_vector_results = [phie_op_vector_results(1) phie_op_vector_results];
+v_cell_spm_with_phie = v_cell_sim_results_spm + 0.625*(phie_op_vector_results(1:max_valid_idx_with_phie))';
 plot(spm_sim_time_vector,v_cell_sim_results_spm,'color','k');
 plot(spm_sim_time_vector(1:max_valid_idx_with_phie),v_cell_spm_with_phie,'color',cbrewer_Gnbubu_blue);
 % title('1C discharge');
 hold off;
 ylabel({'$V_\mathrm{cell}$';'$\mathrm{(V)}$'});
-lgd = legend('P2d','Basic SPM','Composite SPM','location','southwest');
+lgd = legend('P2d','Basic SPM','Composite SPM','location','southeast');
 legend boxoff;
 % return;
 
 t_end_common = min(spm_sim_time_vector(end),time_vector_p2d(end));
-t_common = 0:Ts:t_end_common+Ts;
+t_common = 0:Ts:t_end_common;
 t_end_max = max(spm_sim_time_vector(end),time_vector_p2d(end));
 t_end_max_order = floor(log10(t_end_max));
 t_end_max_plot = ceil((t_end_max/10^t_end_max_order)/0.5)*0.5*10^t_end_max_order;
 xlim([0 t_end_max_plot]);
-ylim([2.5 4.3]);
+ylim([3.6 3.95]);
 ax_handle = gca;
 ax_handle.YAxis.TickValues = linspace(ax_handle.YAxis.Limits(1),ax_handle.YAxis.Limits(2),no_of_y_tick_points); % not for voltage
 ax_handle.XAxis.TickValues = linspace(ax_handle.XAxis.Limits(1),ax_handle.XAxis.Limits(2),no_of_x_tick_points);
@@ -80,75 +81,23 @@ ylabel({'$|\hat{\varepsilon}_v|$';'$(\%)$'});
 
 % title('1C constant current discharge');
 xlim([0 t_end_max_plot]);
-ylim([0 11]);
+% ylim([0 11]);
 ax_handle = gca;
 ax_handle.YAxis.TickValues = linspace(ax_handle.YAxis.Limits(1),ax_handle.YAxis.Limits(2),no_of_y_tick_points); % not for voltage
 ax_handle.XAxis.TickValues = linspace(ax_handle.XAxis.Limits(1),ax_handle.XAxis.Limits(2),no_of_x_tick_points);
 curtick = get(gca, 'XTick');
 set(gca, 'XTickLabel', cellstr(num2str(curtick(:)))); % remove scientific multipliers in x-axis format
 xlabel('time (s)');
-lgd = legend('Basic SPM','Composite SPM','location','northwest');
+lgd = legend('Basic SPM','Composite SPM','location','northeast');
 legend boxoff;
 ylh = get(gca,'ylabel');
 gyl = get(ylh);                                                         % Object Information
 ylp = get(ylh, 'Position');
 set(ylh, 'Rotation',0, 'Position',ylp, 'VerticalAlignment','middle', 'HorizontalAlignment','right')
 
-% return;
+return;
 
-% load('p2d_sim_Aug_08_2018_21_45_58.mat'); % 3C cnst curr dischg (p2d)
-% load('cts_sim_Aug_08_2018_21_43_05.mat'); % 3C constant current (spm)
-% load('phie_sysid_cnst_dischg_soc_100_3CAug_09_2018_12_19_16.mat'); % 3C electrolyte overpotential with saturation
-% axes(ha(2));
-% plot(time_vector_p2d,cell_voltage_results_p2d,'color',cbrewerdarkgray);
-% hold on;
-% max_valid_idx_with_phie = min([length(v_cell_sim_results_spm),length(phie_op_vector_results)]);
-% v_cell_spm_with_phie = v_cell_sim_results_spm + (phie_op_vector_results(1:max_valid_idx_with_phie))';
-% plot(spm_sim_time_vector,v_cell_sim_results_spm,'color','k');
-% plot(spm_sim_time_vector(1:max_valid_idx_with_phie),v_cell_spm_with_phie,'color',cbrewer_Gnbubu_blue);
-% title('1C discharge');
-% hold off;
-% ylabel('$V_\mathrm{cell}\ \mathrm{(V)}$ ');
-% lgd = legend('P2d','Basic SPM','Composite SPM','location','southwest');
-% legend boxoff;
-% 
-% t_end_common = min(spm_sim_time_vector(end),time_vector_p2d(end));
-% t_common = 0:Ts:t_end_common+Ts;
-% t_end_max = max(spm_sim_time_vector(end),time_vector_p2d(end));
-% t_end_max_order = floor(log10(t_end_max));
-% t_end_max_plot = ceil((t_end_max/10^t_end_max_order)/0.5)*0.5*10^t_end_max_order;
-% xlim([0 t_end_max_plot]);
-% ylim([2.5 4.3]);
-% ax_handle = gca;
-% ax_handle.YAxis.TickValues = linspace(ax_handle.YAxis.Limits(1),ax_handle.YAxis.Limits(2),no_of_y_tick_points); % not for voltage
-% ax_handle.XAxis.TickValues = linspace(ax_handle.XAxis.Limits(1),ax_handle.XAxis.Limits(2),no_of_x_tick_points);
-% curtick = get(gca, 'XTick');
-% set(gca, 'XTickLabel', cellstr(num2str(curtick(:)))); % remove scientific multipliers in x-axis format
-% 
-% % return;
-% %
-% max_valid_index = min([length(cell_voltage_results_p2d),length(v_cell_sim_results_spm)]);
-% basic_spm_abs_pct_error = 100*abs((cell_voltage_results_p2d(1:max_valid_index) - v_cell_sim_results_spm(1:max_valid_index))./cell_voltage_results_p2d(1:max_valid_index));
-% composite_spm_abs_pct_error = 100*abs((cell_voltage_results_p2d(1:max_valid_index) - v_cell_spm_with_phie(1:max_valid_index))./cell_voltage_results_p2d(1:max_valid_index));
-% 
-% axes(ha(4));
-% plot(t_common,basic_spm_abs_pct_error,'color','k');
-% hold on;
-% plot(t_common,composite_spm_abs_pct_error,'color',cbrewer_Gnbubu_blue);
-% ylabel('$|\hat{\varepsilon}_v| (\%)$');
-% % title('1C constant current discharge');
-% xlim([0 t_end_max_plot]);
-% % ylim([0 11]);
-% ax_handle = gca;
-% ax_handle.YAxis.TickValues = linspace(ax_handle.YAxis.Limits(1),ax_handle.YAxis.Limits(2),no_of_y_tick_points); % not for voltage
-% ax_handle.XAxis.TickValues = linspace(ax_handle.XAxis.Limits(1),ax_handle.XAxis.Limits(2),no_of_x_tick_points);
-% curtick = get(gca, 'XTick');
-% set(gca, 'XTickLabel', cellstr(num2str(curtick(:)))); % remove scientific multipliers in x-axis format
-% xlabel('time (s)');
-% lgd = legend('Basic SPM','Composite SPM','location','northwest');
-% legend boxoff;
-
-export_fig composite_spm_vcell_1C.pdf -q101
+export_fig composite_spm_vcell_udds.pdf -q101
 return;
 
 extra_axis_options = 'xticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=0,/pgf/number format/fixed,/pgf/number format/fixed zerofill,},yticklabel style={/pgf/number format/1000 sep=, /pgf/number format/precision=2, /pgf/number format/fixed, }, ylabel absolute, ylabel style={rotate=-90}';
