@@ -5,3 +5,7 @@
 3. Run the [cts_time_spm_simulation.m](./cts_time_spm_simulation.m) script for a default 1C-rate discharge simulation
 
 PS: You may peruse the comments within each script/function called by this main script and modify your simulation settings/cell parameters etc.
+
+### License
+
+[MIT-License](https://opensource.org/licenses/MIT)
